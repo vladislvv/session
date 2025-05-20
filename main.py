@@ -10,6 +10,16 @@ from game.menu import Menu
 from game.record import load_record, save_record
 
 pygame.init()
+
+   #звуки
+pygame.mixer.init()
+pygame.mixer.music.load("assets/music.mp3")
+pygame.mixer.music.set_volume(0.3)  # громкость от 0.0 до 1.0
+pygame.mixer.music.play(-1)         # -1 = бесконечное воспроизведение
+death_sound = pygame.mixer.Sound("assets/death.wav")
+
+
+
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pac-Man - Modular")
 clock = pygame.time.Clock()
@@ -52,6 +62,8 @@ while running:
         for ghost in ghosts:
             ghost.update(player.pos)
             if ghost.check_collision(player):
+                death_sound.play()
+                pygame.mixer.music.stop()
                 record = max(score.value, record)
                 save_record(record)
                 game_over = True
