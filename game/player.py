@@ -33,12 +33,12 @@ class Player:
         if is_at_center(self.pos):
             gx, gy = self.grid
 
-            # Телепортация
-            if gx < 0:
+            # Телепортация только в строке 7
+            if gy == 7 and gx == 0 and self.dir == (-1, 0):
                 self.grid[0] = COLS - 1
                 self.pos[0] = PADDING + self.grid[0] * TILE_SIZE + TILE_SIZE // 2
                 return
-            elif gx >= COLS:
+            elif gy == 7 and gx == COLS - 1 and self.dir == (1, 0):
                 self.grid[0] = 0
                 self.pos[0] = PADDING + self.grid[0] * TILE_SIZE + TILE_SIZE // 2
                 return
