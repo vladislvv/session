@@ -1,0 +1,13 @@
+# settings.py
+TILE_SIZE = 20
+ROWS = 17
+COLS = 58
+PADDING = 10
+WIDTH = COLS * TILE_SIZE + PADDING * 2
+HEIGHT = ROWS * TILE_SIZE + PADDING * 2
+FPS = 60
+
+# Цвета
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GRAY = (70, 70, 70)
