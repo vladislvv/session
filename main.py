@@ -13,10 +13,10 @@ pygame.init()
 
    #звуки
 pygame.mixer.init()
-pygame.mixer.music.load("assets/music.mp3")
-pygame.mixer.music.set_volume(0.3)  # громкость от 0.0 до 1.0
-pygame.mixer.music.play(-1)         # -1 = бесконечное воспроизведение
-death_sound = pygame.mixer.Sound("assets/death.wav")
+pygame.mixer.music.load("assets/musicia/music.mp3")
+pygame.mixer.music.set_volume(0.3)  # громкость можно регултровать от 0.0 до 1.0
+pygame.mixer.music.play(-1)
+death_sound = pygame.mixer.Sound("assets/musicia/death.wav")
 
 
 
