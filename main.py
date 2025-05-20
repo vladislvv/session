@@ -5,7 +5,6 @@ from game.maze import draw_maze
 from game.player import Player
 from game.ghost import Ghost
 from game.dotmanager import DotManager
-from game.animation import play_animation
 from game.score import Score
 from game.menu import Menu
 from game.record import load_record, save_record
