@@ -74,9 +74,12 @@ class Player:
             self.frame_index = (self.frame_index + 1) % 2
             self.frame_timer = 0
 
-    def check_dot_collision(self, dot_manager):
+    def check_dot_collision(self, dot_manager, score):
         rect = pygame.Rect(self.pos[0] - 10, self.pos[1] - 10, 20, 20)
+        before = len(dot_manager.dots)
         dot_manager.remove_collided(rect)
+        after = len(dot_manager.dots)
+        score.add((before - after) * 10)
 
     def draw(self, screen):
         direction_map = {
