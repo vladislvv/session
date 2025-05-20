@@ -13,10 +13,22 @@ class Player:
         self.speed = 2
         self.frame_index = 0
         self.frame_timer = 0
-        self.frames = [
-            pygame.transform.scale(pygame.image.load("assets/pacman_frames/pacman_0_0.png").convert_alpha(), (TILE_SIZE, TILE_SIZE)),
-            pygame.transform.scale(pygame.image.load("assets/pacman_frames/pacman_0_1.png").convert_alpha(), (TILE_SIZE, TILE_SIZE))
-        ]
+        self.frames = self.load_frames()
+
+    def load_frames(self):
+        directions = ["right", "up", "left", "down"]
+        all_frames = []
+        for i in range(4):
+            row = [
+                pygame.transform.scale(
+                    pygame.image.load(f"assets/pacman_frames/pacman_{i}_0.png").convert_alpha(),
+                    (TILE_SIZE, TILE_SIZE)),
+                pygame.transform.scale(
+                    pygame.image.load(f"assets/pacman_frames/pacman_{i}_1.png").convert_alpha(),
+                    (TILE_SIZE, TILE_SIZE))
+            ]
+            all_frames.append(row)
+        return all_frames
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
@@ -59,7 +71,7 @@ class Player:
         # Анимация
         self.frame_timer += 1
         if self.frame_timer >= 5:
-            self.frame_index = (self.frame_index + 1) % len(self.frames)
+            self.frame_index = (self.frame_index + 1) % 2
             self.frame_timer = 0
 
     def check_dot_collision(self, dot_manager):
@@ -67,5 +79,12 @@ class Player:
         dot_manager.remove_collided(rect)
 
     def draw(self, screen):
-        image = self.frames[self.frame_index]
+        direction_map = {
+            (1, 0): 0,   # right
+            (0, -1): 1,  # up
+            (-1, 0): 2,  # left
+            (0, 1): 3    # down
+        }
+        dir_index = direction_map.get(self.dir, 0)
+        image = self.frames[dir_index][self.frame_index]
         screen.blit(image, (int(self.pos[0]) - TILE_SIZE // 2, int(self.pos[1]) - TILE_SIZE // 2))
